@@ -88,7 +88,7 @@ class Solution {
 		return minsum;
     }
     public long subArrayRanges(int[] nums) {
-     minSubarraySum(nums.length,nums);
+     
          return maxSubarraySum(nums.length,nums)- minSubarraySum(nums.length,nums);
         
     }
