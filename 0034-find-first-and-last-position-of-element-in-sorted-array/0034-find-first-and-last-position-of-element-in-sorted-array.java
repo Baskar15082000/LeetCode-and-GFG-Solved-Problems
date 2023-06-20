@@ -1,24 +1,48 @@
 class Solution {
-    public int[] searchRange(int[] nums, int target) {
+    public int[] searchRange(int[] v, int k) {
         int arr[]=new int[2];
         arr[0]=-1;
         arr[1]=-1;
-        int n=0;
         
-        for(int i=0;i<nums.length;i++){
-            if(nums[i]==target && n==0){
-                arr[0]=i;
-                arr[1]=i;
-                n=1;
-            }
-            else if(nums[i]==target && n==1){
-                arr[1]=i;
-            }
-           
-        }
-         if(n>0 && nums.length==1){
-                arr[1]=0;
-            }
+        
+ int n=v.length;
+        int f=-1;
+		int s=0,e=n-1;
+		while(s<=e){
+			int mid=(s+e)/2;
+			if(v[mid]==k){
+				f=mid;
+				e=mid-1;
+			}
+			else if(v[mid]>k){
+				e=mid-1;
+			}
+			else{
+				s=mid+1;
+			}
+			
+		}
+
+		int se=-1;
+	    s=0;
+		e=n-1;
+		while(s<=e){
+			int mid=(s+e)/2;
+			if(v[mid]==k){
+				se=mid;
+				s=mid+1;
+			}
+			else if(v[mid]>k){
+				e=mid-1;
+			}
+			else{
+				s=mid+1;
+			}
+			
+		}
+        arr[0]=f;
+        arr[1]=se;
         return arr;
+        
     }
 }
