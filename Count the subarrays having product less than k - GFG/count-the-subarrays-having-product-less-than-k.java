@@ -1,0 +1,68 @@
+//{ Driver Code Starts
+//Initial Template for Java
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+
+class GFG {
+	public static void main(String[] args) throws IOException
+	{
+	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	    PrintWriter out=new PrintWriter(System.out);
+        int t = Integer.parseInt(br.readLine().trim()); // Inputting the testcases
+        while(t-->0)
+        {
+            StringTokenizer stt = new StringTokenizer(br.readLine());
+            
+            int n = Integer.parseInt(stt.nextToken());
+            long k = Long.parseLong(stt.nextToken());
+            
+            long a[] = new long[n];
+            String inputLine[] = br.readLine().trim().split(" ");
+            for (int i = 0; i < n; i++) {
+                a[i] = Long.parseLong(inputLine[i]);
+            }
+            
+            Solution obj = new Solution();
+            out.println(obj.countSubArrayProductLessThanK(a, n, k));
+        }
+        out.close();
+	}
+}
+
+
+// } Driver Code Ends
+
+
+//User function Template for Java
+
+
+class Solution {
+    
+    public long countSubArrayProductLessThanK(long nums[], int n, long k)
+    {
+        int s=0;
+		int e=0;
+		long p=1;
+		long ans=0;
+		while(e<nums.length){
+		   if(nums[s]>=k){
+			   s++;
+			   e++;
+		   }
+			else{
+				 p=p*nums[e];
+		   while(p>=k && p>0){
+			   p=p/nums[s];
+			   s++;
+		   }
+		   ans=ans+(e-s+1);
+		   e++;
+		}
+		}
+		  
+		return ans;
+    }
+}
