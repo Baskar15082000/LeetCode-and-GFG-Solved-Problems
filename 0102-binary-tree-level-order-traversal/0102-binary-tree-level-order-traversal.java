@@ -20,22 +20,22 @@ class Solution {
 		Queue<TreeNode> q=new ArrayDeque<>();
 		q.add(node);
 		while(q.size()>0){
-            ArrayList<Integer> list=new ArrayList<>();
-			int size=q.size();
-			while(size>0){
-				TreeNode newnode=q.remove();
-				if(newnode.left!=null){
-					q.add(newnode.left);
-				}
-				if(newnode.right!=null){
-					q.add(newnode.right);
-				}
-				list.add(newnode.val);
-				size--;
-			}
+            int size=q.size();
+            List<Integer> list =new ArrayList<>();
+            while(size-- >0){
+                TreeNode curr=q.remove();
+                list.add( curr.val );
+                if(curr.left!=null){
+                    q.add(curr.left);
+                }
+                if(curr.right!=null){
+                    q.add(curr.right);
+                }
+                
+            }
             ans.add(list);
-		}
-		return ans;
+        }
+	return ans;
 		
     }
 }
