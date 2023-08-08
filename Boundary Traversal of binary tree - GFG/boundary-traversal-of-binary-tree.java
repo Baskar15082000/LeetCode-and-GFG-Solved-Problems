@@ -109,62 +109,68 @@ class GFG
 
 class Solution
 {
- 
-    ArrayList <Integer> left(Node node,ArrayList<Integer> list){
-        if(node==null){
-            return list;
+   void left(Node root,ArrayList<Integer> list){
+        while(root!=null){
+            if(!leaf(root)){
+                
+            list.add(root.data);
+            }
+            if(root.left!=null){
+                root=root.left;
+            }
+            else{
+                root=root.right;
+            }
         }
-        if(node.left==null && node.right==null){
-            
-        }
-        else{
-            list.add(node.data);
-        }
-        if(node.left!=null){
-            left(node.left,list);
-        }
-        else{
-            left(node.right,list);
-        }
-        return list;
+    }
+        void right(Node root,ArrayList<Integer> list){
+      
+        ArrayList<Integer>temp=new ArrayList< >();
         
-    }   
-     ArrayList <Integer> bottom(Node node,ArrayList<Integer> list){
-         if(node==null)return list;
-         if(node.right==null && node.left==null){
-             list.add(node.data);
-         }
-         bottom(node.left,list);
-         bottom(node.right,list);
-         return list;
-     }
-      ArrayList <Integer> right(Node node,ArrayList<Integer> list){
-          if(node==null)return list;
-          if(node.right!=null) right(node.right,list);
-          else right(node.left,list);
-          if(node.right==null && node.left==null){
-              
-          }
-          else{
-              list.add(node.data);
-          }
-          return list;
-      }
-	ArrayList <Integer> boundary(Node node)
-	
+        while(root != null){
+            if(!leaf(root)){
+                
+              temp.add(root.data);
+            }
+            if(root.right!= null){
+                root=root.right;
+            }
+            else{
+                root=root.left;
+            }
+        }
+        for(int i=temp.size()-1;i>=0;i--){
+            
+            list.add(temp.get(i));
+        }
+        
+    }
+    boolean leaf(Node root){
+        if(root.left==null && root.right==null)return true;
+        else{
+            return false;
+        }
+    }
+    void bottom(Node root ,ArrayList<Integer> list){
+        if(leaf(root)){
+            list.add(root.data);
+            return;
+        }
+        if(root.left!=null) bottom(root.left,list);
+        if(root.right!=null)bottom(root.right,list);
+    }
+    
+	ArrayList <Integer> boundary(Node root)
 	{
+	    if(root==null)return new ArrayList<>();
 	    ArrayList<Integer> list=new ArrayList<>();
-	    if(node==null) return list; 
-	    list.add(node.data);
-	    left(node.left,list);
-	    if(node.left==null && node.right==null){
+	    list.add(root.data);
+	    left(root.left ,list);
+	    if(root.left==null && root.right==null){
 	        
-	    }
-	    else{
-	        bottom(node,list);
-	    }
-	    right(node.right,list);
+	    } 
+	    else bottom(root,list);
+	    right(root.right,list);
 	    return list;
-	    
 	}
 }
