@@ -119,47 +119,40 @@ class GfG {
 
 class Solution
 {
-     class pair{
-		Node node;
-		int level;
-		pair(Node node,int level){
-			this.node=node;
-			this.level=level;
-		}
-	}
     //Function to return a list containing the bottom view of the given tree.
+    class pair{
+        Node node;
+        int level;
+        pair(Node node,int level){
+            this.node=node;
+            this.level=level;
+        }
+    }
     public ArrayList <Integer> bottomView(Node root)
     {
-                		ArrayList<Integer> list=new ArrayList<>();
-		TreeMap<Integer,Integer> map=new TreeMap<>();
-		if(root==null){
-			return new ArrayList<>();
-		}
-		
-		Queue<pair>q=new ArrayDeque<>();
-		q.add(new pair(root,0));
-		while(q.size()>0){
-		        
-				pair p=q.remove();
-				if(map.containsKey(p.level)){
-					map.put(p.level,p.node.data);
-				}
-				else{
-					map.put(p.level,p.node.data);
-				}
-				if(p.node.left!=null){
-				    q.add(new pair(p.node.left,p.level-1));
-				}
-				if(p.node.right!=null){
-					q.add(new pair(p.node.right,p.level+1));
-				}
-			
-		}
-		for(int val:map.keySet()){
-			list.add(map.get(val));
-		}
-		return list;
+        TreeMap<Integer,Integer> map=new TreeMap<>();
+        Queue<pair> q=new LinkedList<>();
+        q.add(new pair(root,0));
+        while(q.size()>0){
+            pair p=q.remove();
+            if(map.containsKey(p.level)){
+                map.put(p.level,p.node.data);
+            }
+            else{
+                map.put(p.level,p.node.data);
+            }
+            if(p.node.left!=null){
+                q.add(new pair(p.node.left,p.level-1));
+            }
+            if(p.node.right!=null){
+                q.add(new pair(p.node.right,p.level+1));
+            }
+        }
+        ArrayList<Integer> list=new ArrayList<>();
+        for(int val:map.keySet()){
+            list.add(map.get(val));
+        }
+        return list;
         
-        // Code here
     }
 }
