@@ -136,8 +136,8 @@ class Tree
     public static int isSumProperty(Node root)
     {
         // add your code here
+        if(root==null || ( root.left==null && root.right==null))return 1;
         int c=0;
-        if(root==null ||( root.left==null && root.right==null))return 1;
         
         
         if(root.left!=null){
