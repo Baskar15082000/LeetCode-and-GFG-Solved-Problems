@@ -14,26 +14,24 @@
  * }
  */
 class Solution {
-    public TreeNode cons(int po[],int post,int poend,int in[],int inst,int inend){
-		if(post>poend || inst>inend){
-			return null;
-		}
-		TreeNode root=new TreeNode(po[poend]);
-		int i=inst;
-		int count=0;
-		while(true){
-			if(root.val==in[i]){
-				break;
-			}
-			i++;
-			count++;
-		}
-		root.left=cons(po,post,post+count-1,in,inst,i-1);
-	    root.right=cons(po,post+count,poend-1,in,i+1,inend);
-		return root;
-	}
-    public TreeNode buildTree(int[] inorder, int[] post) {
-        int n=post.length;
-        return cons(post,0,n-1,inorder,0,n-1);
+     public TreeNode cons(int post[],int ps,int pe,int in[],int is,int ie){
+         if(ps>pe || is>ie)return null;
+        TreeNode root=new TreeNode(post[pe]);
+        int count=0;
+        int i=is;
+        while(true){
+            if(root.val==in[i]){
+                break;
+            }
+            i++;
+            count++;
+           
+        }
+         root.left=cons(post,ps,ps+count-1,in,is,i-1);
+         root.right=cons(post,ps+count,pe-1,in,i+1,ie);
+         return root;
+     }
+    public TreeNode buildTree(int[] in, int[] post) {
+         return cons(post,0,post.length-1,in,0,in.length-1);
     }
 }
