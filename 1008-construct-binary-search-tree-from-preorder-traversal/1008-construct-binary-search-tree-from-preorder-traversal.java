@@ -14,18 +14,23 @@
  * }
  */
 class Solution {
-    int id=0;
-    public TreeNode cons(int []pre,int l, int r){
-        if(pre.length==id)return null;
-        if(pre[id]<l || pre[id]>r)
+    public TreeNode cons(int pre[],int in[],int l,int r){
+        if(in[0]==pre.length){
             return null;
-        TreeNode node =new TreeNode(pre[id]);
-        id++;
-        node.left=cons(pre,l,node.val-1);
-        node.right=cons(pre,node.val+1,r);
-        return node;
+        }
+        if(pre[in[0]]<l || pre[in[0]]>r){
+            return null;
+        }
+        TreeNode root=new TreeNode(pre[in[0]]);
+        in[0]++;
+        root.left=cons(pre,in,l,root.val-1);
+        root.right=cons(pre,in,root.val+1,r);
+        return root;
     }
-    public TreeNode bstFromPreorder(int[] preorder) {
-        return cons(preorder,Integer.MIN_VALUE,Integer.MAX_VALUE);
+    public TreeNode bstFromPreorder(int[] pre) {
+        int id[]=new int[1];
+        id[0]=0;
+        TreeNode root=cons(pre,id,Integer.MIN_VALUE,Integer.MAX_VALUE);
+        return root;
     }
 }
