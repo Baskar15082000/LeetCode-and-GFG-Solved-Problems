@@ -10,12 +10,12 @@ class Solution {
         }
     }
     public int orangesRotting(int[][] grid) {
-        		 int n=grid.length;
+         int n=grid.length;
 		 int m=grid[0].length;
-		int vis[][]=new int [n][m]; 
+		 int vis[][]=new int [n][m]; 
 		 int countfresh=0;
 		 Queue<pair> q=new LinkedList<>();
-		for(int i=0;i<n;i++){
+		 for(int i=0;i<n;i++){
 			for(int j=0;j<m;j++){
 				if(grid[i][j]==2){
 					vis[i][j]=2;
@@ -25,8 +25,8 @@ class Solution {
 					countfresh++;
 				}
 			}
-		}
-		int rotten=0;
+		 }
+		 int rotten=0;
 		 int time=0;
 		while(q.size()>0){
 			pair p=q.remove();
