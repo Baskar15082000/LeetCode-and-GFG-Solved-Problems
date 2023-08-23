@@ -36,50 +36,36 @@ class GFG
 
 
 class Solution
-
 {
-      class pair{
-		int node;
-		int color;
-		pair(int node,int color){
-			this.node=node;
-			this.color=color;
-		}
-	}
-	public boolean bfs(ArrayList<ArrayList<Integer>> graph,int path [],int node){
-			Queue<pair> q=new LinkedList<>();
-		    q.add(new pair(node,1));
-		    while(q.size()>0){
-				pair p=q.remove();
-				if(path[p.node]!=0) continue;
-				path[p.node]=p.color;
-				int opcolor=1;
-				if(p.color==1){
-					opcolor=-1;
-				}
-				for(int val:graph.get(p.node)){
-					if(path[val]==0){
-						q.add(new pair(val,opcolor));
-					}
-					if(path[val]==p.color){
-						return false;
-					}
-				}
-			}
-				return true;
-		
-	}
-    public boolean isBipartite(int V, ArrayList<ArrayList<Integer>>graph)
-    {
-        // Code here
-        int path[]=new int [V];
-        for(int i=0;i<V;i++){
-            if(path[i]==0){
-            boolean ispos=    bfs(graph,path,i);
-            if(!ispos)return false;
+    
+    public boolean dfs(int vis[],int col,int node,ArrayList<ArrayList<Integer>>adj){
+        vis[node]=col;
+        for(int key:adj.get(node)){
+            if(vis[key]==-1){
+               if(dfs(vis,1-col,key,adj)==false){
+                   return false;
+               }
+                
+            }
+            else if(vis[key]==col){
+                return false;
             }
         }
         return true;
-        
+    }
+    public boolean isBipartite(int V, ArrayList<ArrayList<Integer>>adj)
+    
+    {
+       int  vis[]=new int[V];
+        for(int i=0;i<V;i++){
+            vis[i]=-1;
+        }
+        for(int i=0;i<V;i++){
+            if(vis[i]==-1){
+                boolean ispos=dfs(vis,0,i,adj);
+                if(ispos==false)return false;
+            }
+        }
+        return true;
     }
 }
