@@ -1,36 +1,37 @@
 class Solution {
-    public boolean ispos(int A[],int days,int limit){
-        int nod=1;
+    boolean ispos(int mid,int w[],int days){
+        int day=1;
         int sum=0;
-        for(int n:A){
-            if(sum+n<=limit){
-                sum+=n;
+        for(int i:w){
+            if(sum+i<=mid){
+                sum+=i;
             }
             else{
-                nod++;
-                sum=n;
+                day++;
+                sum=i;
             }
         }
-        return nod<=days;
+        return day<=days;
+        
     }
-    public int shipWithinDays(int[] A, int days) {
-        int s=0;
-		int  e=0;
-		for(int n:A){
-			s=Math.max(n,s);
-			e=e+n;
-		}
-		int ans=-1;
-		while(s<=e){
-			int mid=(s+e)/2;
-			if(ispos(A,days,mid)){
-				e=mid-1;
-				ans=mid;
-			}
-			else{
-				s=mid+1;
-			}
-		}
-		return ans;
+    public int shipWithinDays(int[] weights, int days) {
+        int s=Integer.MIN_VALUE;
+        int e=0;
+        for(int i:weights){
+            s=Math.max(i,s);
+            e+=i;
+        }
+        int ans=0;
+        while(s<=e){
+            int mid=(s+e)/2;
+            if(ispos(mid,weights,days)){
+                ans=mid;
+                e=mid-1;
+            }
+            else{
+                s=mid+1;
+            }
+        }
+        return ans;
     }
 }
