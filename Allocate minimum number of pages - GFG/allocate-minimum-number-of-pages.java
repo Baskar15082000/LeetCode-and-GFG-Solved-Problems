@@ -32,37 +32,36 @@ class GFG {
 //User function Template for Java
 
 class Solution 
+
 {
-    public static boolean ispossible(int A[],int maxstu,int limit){
-        int noofstu=1;
+    static  boolean ispos(int mid,int A[],int M){
+        int st=1;
         int sum=0;
-        for(int a:A){
-            if(sum+a<=limit){
-                sum+=a;
+        for(int i:A){
+            if((sum+i) <= mid){
+                sum+=i;
             }
             else{
-                noofstu++;
-                sum=a;
+                st++;
+                sum=i;
             }
         }
-        return noofstu<=maxstu;
+        return st<=M;
     }
     //Function to find minimum number of pages.
-    public static int findPages(int[]A,int n,int stu)
+    public static int findPages(int[]A,int N,int M)
     {
-        //Your code here
-       // System.out.print(stu);
         int s=0;
         int e=0;
-        int ans=0;
-        if(stu>A.length)return -1;
-        for(int a:A){
-            s=Math.max(s,a);
-            e+=a;
+        for(int i:A){
+            s=Math.max(s,i);
+            e+=i;
         }
+        if(M>N)return -1;
+        int ans=-1;
         while(s<=e){
             int mid=(s+e)/2;
-            if(ispossible(A,stu,mid)){
+            if(ispos(mid,A,M)){
                 ans=mid;
                 e=mid-1;
             }
@@ -71,6 +70,5 @@ class Solution
             }
         }
         return ans;
-        
     }
 };
