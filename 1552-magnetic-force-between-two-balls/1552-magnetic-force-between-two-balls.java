@@ -2,7 +2,7 @@ class Solution {
     public boolean ispos(int []position,int m,int limit){
         int no=1;
         int pla=position[0];
-        for(int i=0;i<position.length;i++){
+        for(int i=1;i<position.length;i++){
             if(position[i]-pla>=limit){
                 no++;
                 pla=position[i];
