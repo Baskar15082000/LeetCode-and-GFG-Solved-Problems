@@ -15,10 +15,8 @@ class Solution {
         int s=0;
         int e=0;
         int ans=-1;
-        for(int i=1;i<position.length;i++){
-            s=Math.min(s,position[i]-position[i-1]);
-            
-        }
+       
+        s=1;
         e=position[position.length-1]-position[0];
         if(position.length<m)return -1;
         while(s<=e){
