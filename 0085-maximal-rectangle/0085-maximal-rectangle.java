@@ -14,7 +14,8 @@ class Solution {
             for (int j = 0; j < cols; j++) {
                 if (matrix[i][j] == '1') {
                     heights[j] = heights[j] + 1;
-                } else {
+                }
+                else {
                     heights[j] = 0;
                 }
             }
@@ -22,19 +23,41 @@ class Solution {
         }
          return maxRectangleArea;
     }
-    private int largestRectangleArea(int[] heights) {
-        int maxArea = 0;
-        Stack<Integer> stack = new Stack<>();
-        int len = heights.length;
-
-        for (int i = 0; i <= len; i++) {
-            while (!stack.isEmpty() && (i == len || heights[i] < heights[stack.peek()])) {
-                int height = heights[stack.pop()];
-                int width = stack.isEmpty() ? i : i - stack.peek() - 1;
-                maxArea = Math.max(maxArea, height * width);
+    private int largestRectangleArea(int[] height) {
+        
+      
+        int len = height.length;
+        int min=Integer.MAX_VALUE;
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<len;i++){
+            if(height[i]!=0){
+                min=Math.min(min,height[i]);
+                max=Math.max(max,height[i]);
             }
-            stack.push(i);
         }
-        return maxArea;
+        System.out.print(min+" "+max);
+        if(min==Integer.MAX_VALUE || max==Integer.MIN_VALUE)return 0;
+        int ans=0;
+        int a=0;
+        
+        for (int i = min; i <=max; i++) {
+            for(int j=0;j<len;j++){
+                if(i<=height[j]){
+                    ans+=i;
+                     a=Math.max(a,ans);
+                }
+                else{
+                   
+                    ans=0;
+                   
+                }
+            }
+            
+             ans=0;
+             a=Math.max(a,ans);
+           
+        }
+        
+        return a;
 }
 }
