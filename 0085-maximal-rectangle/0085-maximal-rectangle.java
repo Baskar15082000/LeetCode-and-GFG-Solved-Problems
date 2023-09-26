@@ -44,7 +44,7 @@ class Solution {
             for(int j=0;j<len;j++){
                 if(i<=height[j]){
                     ans+=i;
-                     a=Math.max(a,ans);
+                    a=Math.max(a,ans);
                 }
                 else{
                    
@@ -54,8 +54,6 @@ class Solution {
             }
             
              ans=0;
-          //   a=Math.max(a,ans);
-           
         }
         
         return a;
