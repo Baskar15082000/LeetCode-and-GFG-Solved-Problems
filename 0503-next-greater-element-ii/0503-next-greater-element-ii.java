@@ -2,7 +2,7 @@ class Solution {
     public int[] nextGreaterElements(int[] nums) {
         Stack<Integer> st=new Stack<>();
         int ans[]=new int [nums.length];
-        int x=0;
+        
         
         for(int i=0;i<nums.length;i++){
             
