@@ -7,7 +7,9 @@ class Solution {
 
         // Sort the characters based on their frequencies in decreasing order
         List<Character> sortedChars = new ArrayList<>(charCount.keySet());
-        sortedChars.sort((a, b) -> charCount.get(b) - charCount.get(a));
+        Collections.sort(sortedChars,(a,b)->{
+            return charCount.get(b)-charCount.get(a);
+        });
 
         // Create the sorted string
         StringBuilder sortedStr = new StringBuilder();
