@@ -26,6 +26,7 @@ class Solution {
 				   curr.put(c,curr.get(c)-1);
 				   t++;
 				   sp++;
+                   
 			   }
 			   len+=t;
 			   ep++;
