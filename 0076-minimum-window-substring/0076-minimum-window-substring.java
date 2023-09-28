@@ -1,66 +1,51 @@
 class Solution {
+    public boolean freqcheck(HashMap<Character, Integer> f1, HashMap<Character, Integer> f2)
+	{
+		for(char key : f2.keySet())
+			{
+				if(!f1.containsKey(key)) return false;
+				if(f1.get(key) < f2.get(key)) return false;
+			}
+		return true;
+	}
     public String minWindow(String s, String t) {
-        		HashMap<Character,Integer> map1 = new HashMap<>();
-		for(int i=0;i<t.length();i++){
-			char ch=t.charAt(i);
-			if(map1.containsKey(ch)){
-				map1.put(ch,map1.get(ch)+1);
+        int left = 0;
+		int right = 0;
+		int len = Integer.MAX_VALUE;
+		String ans = "";
+
+		HashMap<Character, Integer> f2 = new HashMap<>();
+		HashMap<Character, Integer> f1 = new HashMap<>();
+
+		for(int i = 0; i < t.length(); i++)
+			{
+				char ch = t.charAt(i);
+				f2.put(ch, f2.getOrDefault(ch,0)+1);
 			}
-			else{
-				map1.put(ch,1);
-			}
-		}
-		String ans="";
-		HashMap<Character,Integer> map2=new HashMap<>();
-		int match=t.length();
-		int count=0;
-		int l=0;
-		int r=0;
-		while(true){
-			boolean f1=false;
-			boolean f2=false;
-			
-			if(r<s.length() && match>count){
-				char ch=s.charAt(r);
-				if(map1.containsKey(ch)){
-					if(map2.getOrDefault(ch,0)<map1.get(ch)){
-						count++;
+
+		while(right < s.length())
+			{
+				char ch = s.charAt(right);
+				f1.put(ch, f1.getOrDefault(ch, 0)+1);
+
+				while(freqcheck(f1,f2))
+					{
+						if(right-left+1 < len)
+						{
+							len = right-left+1;
+							ans = s.substring(left,right+1);
+						}
+
+						char currleft = s.charAt(left);
+						f1.put(currleft, f1.get(currleft)-1);
+						if(f1.get(currleft) == 0)
+						{
+							f1.remove(currleft);
+						}
+						left++;
 					}
-				}
-				if(map2.containsKey(ch)){
-					map2.put(ch,map2.get(ch)+1);
-				}
-				else{
-					map2.put(ch,1);
-				}
-				//System.out.print("Ff");
-				f1=true;
-                
-			 r++;
+				right++;
 			}
-			else if(l<r && match==count){
-				String sub=s.substring(l,r);
-				if(ans=="" || (ans.length()>sub.length())){
-					ans=sub;
-					//System.out.print(ans);
-				}
-				
-				char cha=s.charAt(l);
-				if(map1.containsKey(cha)){
-					if(map2.get(cha)<=map1.get(cha)){
-						 count--;
-					}
-				}
-				map2.put(cha,map2.get(cha)-1);
-				if(map2.get(cha)==0){
-					map2.remove(cha); 
-				}
-				l++;
-				f2=true;
-			
-			}
-			if(f1==false && f2==false) break;
-		}
 		return ans;
     }
 }
