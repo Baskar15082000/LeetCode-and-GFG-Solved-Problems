@@ -10,8 +10,7 @@ class LFUCache {
 		cap = capacity;
 		freqKeysMap.put(1,new LinkedHashSet<>());
 	}
-
-	public int get(int key) {
+    public int get(int key) {
         if(!keyValueMap.containsKey(key)) {
 			return -1;
 		}
@@ -27,10 +26,8 @@ class LFUCache {
 		freqKeysMap.get(frequency+1).add(key);
 	    return keyValueMap.get(key);
 	}
-
     public void put(int key, int value) {
-		if(cap<=0)
-			return;
+		
 		if(keyValueMap.containsKey(key))
 		{
 			keyValueMap.put(key,value);
