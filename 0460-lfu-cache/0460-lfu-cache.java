@@ -31,15 +31,15 @@ class LFUCache {
 		if(keyValueMap.containsKey(key))
 		{
 			keyValueMap.put(key,value);
-            get(key);
-			return;
+            get(key); // important --------------------------------------------------------***
+            return;
 		}
 		if(keyValueMap.size()>=cap)
 		{
-			int keyToBeEvicted = freqKeysMap.get(min).iterator().next();
-			freqKeysMap.get(min).remove(keyToBeEvicted);
-			keyValueMap.remove(keyToBeEvicted);
-			keyFrequencyMap.remove(keyToBeEvicted);
+			int keyToremove = freqKeysMap.get(min).iterator().next();
+			freqKeysMap.get(min).remove(keyToremove);
+			keyValueMap.remove(keyToremove);
+			keyFrequencyMap.remove(keyToremove);
 		}
 		// key is not present in the KeyValueMap
 		keyValueMap.put(key,value);
