@@ -19,7 +19,7 @@ class Solution {
                 ans[st.pop()]=nums[i];
             }
             
-         }
+       }
         while(st.size()>0){
             ans[st.pop()]=-1;
         }
