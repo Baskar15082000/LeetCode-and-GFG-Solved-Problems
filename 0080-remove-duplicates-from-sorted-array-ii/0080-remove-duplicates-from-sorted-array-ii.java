@@ -9,13 +9,14 @@ class Solution {
     int k = 2;  
     
     int j = k;  
-    
-    for (int i=k; i < n; i++) {
+    int i=k;
+    while(i < n) {
        
         if (nums[i] != nums[j - k]) {
             nums[j] = nums[i]; 
             j++;
         }
+        i++;
     }
     
     return j;
