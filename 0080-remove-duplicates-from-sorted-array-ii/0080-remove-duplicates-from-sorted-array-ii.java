@@ -6,13 +6,11 @@ class Solution {
         return n;
     }
     
-    int k = 2;  
-    
-    int j = k;  
-    int i=k;
+    int j = 2;  
+    int i=2;
     while(i < n) {
        
-        if (nums[i] != nums[j - k]) {
+        if (nums[i] != nums[j - 2]) {
             nums[j] = nums[i]; 
             j++;
         }
