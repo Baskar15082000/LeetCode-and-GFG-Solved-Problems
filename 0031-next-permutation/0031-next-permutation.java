@@ -5,6 +5,7 @@ class Solution {
         while(i>=0 && nums[i]>=nums[i+1]){
             i--;
         }
+       // System.out.print(nums[i]);
         if(i==-1){
             reverse(nums,0,n-1);
             return;
